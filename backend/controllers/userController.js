@@ -48,7 +48,7 @@ const getUserWithBooks = async (req, res) => {
     }
 
     // Find all books created by this user
-    const books = await Book.find({ creator: user._id });
+    const books = await Book.find({ creator: user._id }).populate("userBook")
     // populate('Book').
 
     res.status(200).json({ user, books });

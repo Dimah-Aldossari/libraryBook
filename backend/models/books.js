@@ -15,9 +15,9 @@ const bookSchema = new Schema({
         type: String,
         required: true
     },
-    creater: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "user",
+    user: {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
     },
 }, { timestamps: true })
 

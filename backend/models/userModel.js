@@ -14,7 +14,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     }, userBook: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: "Book",
     }],
 })
