@@ -41,15 +41,21 @@ const createBook = async (req, res) => {
     if (!description) {
         emptyFields.push('description')
     }
+    if (!userId) {
+        emptyFields.push('userId')
+    }
     if (emptyFields.length > 0) {
         return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
     }
     try {
-        const user = await User.findById(userId);
-        // console.log(user)
-        const book = await Book.create({ title, image, description, user })
-        res.status(200).json(book)
-
+        const user = await User.find(userId);
+        if (!user) {
+            return res.status(400).json({ error: "No such user" });
+        }
+        const book = await Book.create({ title, image, description, user });
+        user.userBook.push(book);
+        await user.save();
+        res.status(201).json(book);
     }
     catch (error) {
         res.status(400).json({ error: error.message })

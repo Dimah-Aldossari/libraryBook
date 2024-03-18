@@ -21,7 +21,8 @@ function UseLogin() {
     try {
       const response = await axios.post('http://localhost:3000/api/user/login', formData);
       console.log(response.data);
-      localStorage.setItem('userId', response.data.token);
+      localStorage.setItem('userId', response.data.userId);
+      localStorage.setItem('token', response.data.token);
 
       navigate("/Profile");
 

@@ -5,7 +5,9 @@ const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 
 const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.SECRET)
+  const signiturw = jwt.sign({ _id }, process.env.SECRET);
+  console.log(signiturw + "");
+  return signiturw;
 }
 
 // get all Users
@@ -41,14 +43,18 @@ const getUserWithBooks = async (req, res) => {
   }
 
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate('userBook');
 
     if (!user) {
       return res.status(404).json({ error: 'No such user id' });
     }
 
     // Find all books created by this user
-    const books = await Book.find({ creator: user._id }).populate("userBook")
+    const books = await Book.find({
+      "_id": {
+        "$in": user.userBook
+      }
+    })
     // populate('Book').
 
     res.status(200).json({ user, books });
@@ -66,9 +72,10 @@ const loginUser = async (req, res) => {
     const user = await User.login(email, password)
 
     // create a token
-    const token = createToken(user._id)
-
-    res.status(200).json({ email, token })
+    const userId = user._id;
+    const token = createToken(userId)
+    console.log(token + "user");
+    res.status(200).json({ email, token, userId })
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
