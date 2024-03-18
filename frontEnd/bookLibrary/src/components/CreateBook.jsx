@@ -45,7 +45,7 @@ function CreateBook() {
         })
           .then(function (response) {
             console.log(response);
-            // navigate("/BookDetails");
+            navigate("/BookDetails");
           })
           .catch(function (error) {
             console.log(error);
