@@ -1,8 +1,10 @@
 import React from "react";
 import axios from "axios";
+//  import { useNavigate } from "react-router-dom";
 
 function BookDetails() {
   const [books, setBooks] = React.useState([]);
+  // let navigat =  useNavigate()
 
   React.useEffect(() => {
     getData()
@@ -30,17 +32,22 @@ function BookDetails() {
     <div>
       {books.length > 0 ? (
         books.map((book) => (
+          
           <div key={book._id}>
             <img src={book.image} alt={book.title} width="10%" height="100vh" />
             <p>title: {book.title}</p>
             <p>description: {book.description}</p>
             <button onClick={() => deleteBook(book._id)}>delete</button>
+            
+
             <hr />
+
           </div>
         ))
       ) : (
         <p>No books available</p>
       )}
+
     </div>
   );
 }

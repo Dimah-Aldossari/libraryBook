@@ -38,8 +38,9 @@ function App() {
               path="/UseLogin" 
               element={<UseLogin />} 
             />
-              <Route 
-              path="/Profile" 
+           
+               <Route 
+              path="/Profile/:id" 
               element={<Profile />} 
             />
           </Routes>

@@ -49,7 +49,7 @@ const getUserWithBooks = async (req, res) => {
 
 		const books = await Book.find({ user: user._id });
 
-		res.status(200).json({ user, books });
+		res.status(200).json({ user: user, books: books });
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 	}
