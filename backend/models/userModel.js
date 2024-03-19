@@ -68,4 +68,14 @@ userSchema.statics.login = async function (email, password) {
     return user;
 };
 
+
+
+// userSchema.pre("findOneAndDelete", async function (next) {
+//     const user = await this.model.findOne(this.getFilter());
+//     const book = await this.model.model("Book").findById(user.book);
+//     book.user.pull(user);
+//     await book.save();
+
+//     next();
+// });
 module.exports = mongoose.model("User", userSchema);
