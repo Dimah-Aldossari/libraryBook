@@ -1,30 +1,32 @@
 import axios from "axios";
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 function Profile() {
-  const [books, setBooks] = React.useState([])
-const id = localStorage.getItem("userId")
+	const [books, setBooks] = React.useState([]);
+	const id = localStorage.getItem("userId");
 
- useEffect(() => {
-   const  getUserInfo = async () => {
+	useEffect(() => {
+		const getUserInfo = async () => {
+			const response = await axios.get(
+				`http://localhost:3000/api/user/users/${id}`
+			);
 
-    const response = await axios.get(`http://localhost:3000/api/user/${id}`);
+			console.log(response.data.userBook);
+			setBooks(response.data);
+		};
+		getUserInfo();
+	});
 
-    console.log(response.data.userBook);
-    setBooks(response.data)
-  }
-  getUserInfo();
-
- })
- 
-  return (
-    <div>
-  <p>
-    {books.map(item=>{<>
-    <p>{item.title}</p>
-    </>})}
-  </p>
-    </div>
-  );
+	return (
+		<div>
+			<p>
+				{books.map((item) => {
+					<>
+						<p>{item.title}</p>
+					</>;
+				})}
+			</p>
+		</div>
+	);
 }
 
 export default Profile;
