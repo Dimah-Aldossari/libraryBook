@@ -6,8 +6,6 @@ import {jwtDecode} from "jwt-decode";
 function CreateBook() {
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
-
-
     
     const decoded = jwtDecode(token);
 
